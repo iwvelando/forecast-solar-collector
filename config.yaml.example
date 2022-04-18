@@ -1,0 +1,37 @@
+---
+# Solar panel Configuration
+solarPanels:
+  location:
+    latitude: 0.00 # latitude of the location of the panel array(s)
+    longitude: 0.00 # longitude of the location of the panel array(s)
+  arrays:
+    - name: array1
+      declination: 25.5 # plane declination of panel array from 0 degrees (horizontal) to 90 degrees (vertical)
+      azimuth: 135.5 # plane azimuth from -180 degrees to 180 degrees where -90 = east, 0 = south, 90 = west, and 180 = north
+      power: 2.975 # total power output rating of panel array in kilowatts
+    - name: array2
+      declination: 40
+      azimuth: -45
+      power: 4.25
+
+# forecast.solar Configuration
+forecastSolar:
+  url: https://api.forecast.solar # base URL for forecast.solar
+  apiKey: myapikey # (optional) API key for https://forecast.solar/; if not specified will use free access
+  skipVerifySsl: false
+  noComputeTotals: false # if false, additional data points will be added to InfluxDB under the "all" array name that sums the forecasts of all individual arrays
+
+# InfluxDB Configuration
+influxDB:
+  address: https://127.0.0.1:8086  # HTTP address for InfluxDB
+  username: myuser  # (optional) username for authenticating to InfluxDB v1
+  password: mypass  # (optional) password for authenticating to InfluxDB v1
+  measurementPrefix: prefix_  # (optional) set a prefix for the InfluxDB measurement
+  database: mydb  # (v1 only) database for use for InfluxDB v1
+  retentionPolicy: autogen  # (v1 only) retention policy for database
+  token: mytoken  # (v2 only) token for authenticating to InfluxDB; setting this assumes v2
+  organization: myorg  # (v2 only) sets the organization
+  bucket: mybucket  # (v2 only) sets the bucket
+  skipVerifySsl: false  # toggle skipping SSL verification
+  flushInterval: 30  # flush interval (time limit before writing points to the db) in seconds; defaults to 30
+
